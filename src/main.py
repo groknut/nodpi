@@ -1158,53 +1158,53 @@ class ProxyApplication:
         """Parse command line arguments"""
 
         parser = argparse.ArgumentParser()
-        parser.add_argument("--host", default="127.0.0.1", help="Proxy host")
-        parser.add_argument("--port", type=int,
-                            default=8881, help="Proxy port")
-        parser.add_argument(
-            "--out-host", help="Outgoing proxy host"
-        )
-
-        blacklist_group = parser.add_mutually_exclusive_group()
-        blacklist_group.add_argument(
-            "--blacklist", default="blacklist.txt", help="Path to blacklist file"
-        )
-        blacklist_group.add_argument(
-            "--no-blacklist",
-            action="store_true",
-            help="Use fragmentation for all domains",
-        )
-        blacklist_group.add_argument(
-            "--autoblacklist",
-            action="store_true",
-            help="Automatic detection of blocked domains",
-        )
-
-        parser.add_argument("--fragment-method", default="random", choices=[
-                            "random", "sni"], help="Fragmentation method (random by default)")
-        parser.add_argument("--domain-matching", default="strict",
-                            choices=["loose", "strict"], help="Domain matching mode (strict by default)")
-        parser.add_argument(
-            "--log-access", required=False, help="Path to the access control log"
-        )
-        parser.add_argument(
-            "--log-error", required=False, help="Path to log file for errors"
-        )
-        parser.add_argument(
-            "-q", "--quiet", action="store_true", help="Remove UI output"
-        )
-
-        autostart_group = parser.add_mutually_exclusive_group()
-        autostart_group.add_argument(
-            "--install",
-            action="store_true",
-            help="Add proxy to Windows/Linux autostart (only for executable version)",
-        )
-        autostart_group.add_argument(
-            "--uninstall",
-            action="store_true",
-            help="Remove proxy from Windows/Linux autostart (only for executable version)",
-        )
+#         parser.add_argument("--host", default="127.0.0.1", help="Proxy host")
+#         parser.add_argument("--port", type=int,
+#                             default=8881, help="Proxy port")
+#         parser.add_argument(
+#             "--out-host", help="Outgoing proxy host"
+#         )
+# 
+#         blacklist_group = parser.add_mutually_exclusive_group()
+#         blacklist_group.add_argument(
+#             "--blacklist", default="blacklist.txt", help="Path to blacklist file"
+#         )
+#         blacklist_group.add_argument(
+#             "--no-blacklist",
+#             action="store_true",
+#             help="Use fragmentation for all domains",
+#         )
+#         blacklist_group.add_argument(
+#             "--autoblacklist",
+#             action="store_true",
+#             help="Automatic detection of blocked domains",
+#         )
+# 
+#         parser.add_argument("--fragment-method", default="random", choices=[
+#                             "random", "sni"], help="Fragmentation method (random by default)")
+#         parser.add_argument("--domain-matching", default="strict",
+#                             choices=["loose", "strict"], help="Domain matching mode (strict by default)")
+#         parser.add_argument(
+#             "--log-access", required=False, help="Path to the access control log"
+#         )
+#         parser.add_argument(
+#             "--log-error", required=False, help="Path to log file for errors"
+#         )
+#         parser.add_argument(
+#             "-q", "--quiet", action="store_true", help="Remove UI output"
+#         )
+# 
+#         autostart_group = parser.add_mutually_exclusive_group()
+#         autostart_group.add_argument(
+#             "--install",
+#             action="store_true",
+#             help="Add proxy to Windows/Linux autostart (only for executable version)",
+#         )
+#         autostart_group.add_argument(
+#             "--uninstall",
+#             action="store_true",
+#             help="Remove proxy from Windows/Linux autostart (only for executable version)",
+#         )
 
         return parser.parse_args()
 
@@ -1216,23 +1216,23 @@ class ProxyApplication:
 
         args = cls.parse_args()
 
-        if args.install or args.uninstall:
-            if getattr(sys, "frozen", False):
-                if args.install:
-                    if sys.platform == "win32":
-                        WindowsAutostartManager.manage_autostart("install")
-                    elif sys.platform == "linux":
-                        LinuxAutostartManager.manage_autostart("install")
-                elif args.uninstall:
-                    if sys.platform == "win32":
-                        WindowsAutostartManager.manage_autostart("uninstall")
-                    elif sys.platform == "linux":
-                        LinuxAutostartManager.manage_autostart("uninstall")
-                sys.exit(0)
-            else:
-                print(
-                    "\033[91m[ERROR]: Autostart works only in executable version\033[0m")
-                sys.exit(1)
+        # if args.install or args.uninstall:
+        #     if getattr(sys, "frozen", False):
+        #         if args.install:
+        #             if sys.platform == "win32":
+        #                 WindowsAutostartManager.manage_autostart("install")
+        #             elif sys.platform == "linux":
+        #                 LinuxAutostartManager.manage_autostart("install")
+        #         elif args.uninstall:
+        #             if sys.platform == "win32":
+        #                 WindowsAutostartManager.manage_autostart("uninstall")
+        #             elif sys.platform == "linux":
+        #                 LinuxAutostartManager.manage_autostart("uninstall")
+        #         sys.exit(0)
+        #     else:
+        #         print(
+        #             "\033[91m[ERROR]: Autostart works only in executable version\033[0m")
+        #         sys.exit(1)
 
         config = ConfigLoader.load_from_args(args)
 
