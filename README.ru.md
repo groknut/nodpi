@@ -1,6 +1,11 @@
 
 ## nodpi
 
+**Читайте на других языках:**
+- **[English](README.md)**
+- [Русский](README.ru.md)
+
+
 **nodpi** — это утилита, предназначенная для обхода DPI (Deep Packet Inspection). Является форком [NoDPI](https://github.com/GVCoder09/NoDPI).
 
 !["Screenshot"](./assets/screen.png)
